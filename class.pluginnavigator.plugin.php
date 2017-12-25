@@ -1,13 +1,15 @@
-<?php defined('APPLICATION') or die;
+<?php
 
-$PluginInfo['PluginNavigator'] = array(
+$PluginInfo['PluginNavigator'] = [
     'Name' => 'Plugin Navigator',
     'Description' => 'Adds shortcuts to the plugins/all overview. Only useful if you have a lot of plugins.',
-    'Version' => '0.3',
-    'RequiredApplications' => array('Vanilla' => '2.1'),
+    'Version' => '0.4.0',
+    'MobileFriendly' => true,
+    'RequiredApplications' => ['Vanilla' => '2.5'],
     'Author' => 'Robin Jurinka',
+    'AuthorUrl' => 'https://open.vanillaforums.com/profile/r_j',
     'License' => 'MIT'
-);
+];
 
 class PluginNavigatorPlugin extends Gdn_Plugin {
     /**
@@ -19,10 +21,7 @@ class PluginNavigatorPlugin extends Gdn_Plugin {
      * @param object $Sender SettingsController.
      * @return void
      */
-    public function settingsController_render_before ($Sender) {
-        if ($Sender->RequestMethod != 'plugins') {
-            return;
-        }
-        $Sender->View = $this->GetView('plugins.php');
+    public function settingsController_beforeAddonList_handler($sender, $args) {
+decho($args('AvailableAddons'));
     }
 }
